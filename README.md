@@ -2,7 +2,7 @@
 Source codes of ACMMM21 paper: Learning Hierarchical Embeddings for Video Instance Segmentation 
 In this paper, we propose a normalizing flow based generative method for video instance segmentation.
 #
-![](../framework.png)
+![](framework.png)
 
 
 
