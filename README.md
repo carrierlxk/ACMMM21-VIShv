@@ -1,5 +1,5 @@
 # ACMMM21-VIShv
-Source codes of ACMMM21 paper: Learning Hierarchical Embeddings for Video Instance Segmentation 
+Source codes of ACMMM21 paper: Learning Hierarchical Embeddings for Video Instance Segmentation[https://dl.acm.org/doi/10.1145/3474085.3475342]. 
 In this paper, we propose a normalizing flow based generative method for video instance segmentation.
 #
 ![](framework.png)
