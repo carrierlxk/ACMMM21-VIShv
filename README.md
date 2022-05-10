@@ -8,7 +8,9 @@ In this paper, we propose a normalizing flow based generative method for video i
 
 
 ### Citation
-@inproceedings{qin2021mm,
+If you find the code and dataset useful in your research, please consider citing:
+```
+@inproceedings{qin2021mm, 
   author = {Qin, Zheyun and Lu, Xiankai and Nie, Xiushan and Zhen, Xiantong and Yin, Yinlong},
   title = {Learning Hierarchical Embeddings for Video Instance Segmentation},
   booktitle = {ACM Multimedia},
