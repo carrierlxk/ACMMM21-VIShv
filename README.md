@@ -58,7 +58,7 @@ For inference, you only need to set the relevant variable for the target dataset
    
 5. `PASCAL_VOC_IMAGES_DIR`: Set this to the `JPEGImages` directory of the PascalVOC dataset.This variable is required for training for DAVIS and YouTube-VIS. 
    
-6. `MAPILLARY_IMAGES_DIR`: You will need to do two extra things here: (1) Put all the training and validation images into a single directory (18k + 2k = 20k images in total). (ii) Since Mapillary images are very large, we first down-sampled them. The expected size for each image is given in `stemseg/data/metainfo/mapillary_image_dims.json` as a dictionary from the image file name to a (width, height) tuple. Please use OpenCV's `cv2.resize` method with `interpolation=cv2.INTER_LINEAR` to ensure the best consistency between your down-sampled images and the annotations we provide in our JSON file. This variable is required for training for KITTI-MOTS.
+6. `MAPILLARY_IMAGES_DIR`: You will need to do two extra things here: (1) Put all the training and validation images into a single directory (18k + 2k = 20k images in total). (ii) Since Mapillary images are very large, we first down-sampled them. The expected size for each image is given in `base/data/metainfo/mapillary_image_dims.json` as a dictionary from the image file name to a (width, height) tuple. Please use OpenCV's `cv2.resize` method with `interpolation=cv2.INTER_LINEAR` to ensure the best consistency between your down-sampled images and the annotations we provide in our JSON file. This variable is required for training for KITTI-MOTS.
 
 
 ## Inference
@@ -68,13 +68,13 @@ Assuming the relevant dataset environment variables are correctly set, just run 
 1. DAVIS:
 
     ```bash
-    python stemseg/inference/main.py /path/to/downloaded/checkpoints/davis.pth -o /path/to/output_dir --dataset davis
+    python base/inference/main.py /path/to/downloaded/checkpoints/davis.pth -o /path/to/output_dir --dataset davis
     ```
     
 2. YouTube-VIS:
 
     ```bash
-    python stemseg/inference/main.py /path/to/downloaded/checkpoints/youtube_vis.pth -o /path/to/output_dir --dataset ytvis --resize_embeddings
+    python base/inference/main.py /path/to/downloaded/checkpoints/youtube_vis.pth -o /path/to/output_dir --dataset ytvis --resize_embeddings
     ```
     
 For each dataset, the output written to `/path/to/output_dir` will be in the same format as that required for the official evaluation tool for each dataset. To obtain visualizations of the generated segmentation masks, you can add a `--save_vis` flag to the above commands.
@@ -93,13 +93,13 @@ The final inference reported in the paper is done using clips of length 16 frame
 1. First we train end-to-end with 8 frame long clips:
    
    ```bash 
-   python stemseg/training/main.py --model_dir some_dir_name --cfg davis_1.yaml
+   python base/training/main.py --model_dir some_dir_name --cfg davis_1.yaml
    ```
    
 2. Then we freeze the encoder network (backbone and FPN) and train only the decoders with 16 frame long clips:
 
    ```bash 
-   python stemseg/training/main.py --model_dir another_dir_name --cfg davis_2.yaml --initial_ckpt /path/to/last/ckpt/from/previous/step.pth
+   python base/training/main.py --model_dir another_dir_name --cfg davis_2.yaml --initial_ckpt /path/to/last/ckpt/from/previous/step.pth
    ```
    
 The training code creates a directory at `$STEMSEG_MODELS_DIR/checkpoints/DAVIS/some_dir_name` and places all checkpoints and logs for that training session inside it. For the second step we want to restore the final weights from the first step, hence the additional `--initial_ckpt` argument.
@@ -109,7 +109,7 @@ The training code creates a directory at `$STEMSEG_MODELS_DIR/checkpoints/DAVIS/
 Here, the final inference was done on 8 frame clips, so the model can be trained in a single step:
 
 ```bash 
-python stemseg/training/main.py --model_dir some_dir_name --cfg youtube_vis.yaml
+python base/training/main.py --model_dir some_dir_name --cfg youtube_vis.yaml
 ```
 
 The training output for this will be placed in `$STEMSEG_MODELS_DIR/checkpoints/youtube_vis/some_dir_name`.
