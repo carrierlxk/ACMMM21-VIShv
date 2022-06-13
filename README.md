@@ -36,9 +36,9 @@ File paths to datasets and model checkpoints are configured using environment va
 
 ### Required
    
-1. `STEMSEG_JSON_ANNOTATIONS_DIR`: To streamline the code, we reorganized the annotations and file paths for every dataset into a standard JSON format. These JSON files can be downloaded from [here](https://omnomnom.vision.rwth-aachen.de/data/STEm-Seg/dataset_jsons/). Set this variable to the directory holding these JSON files.
+1. `base_JSON_ANNOTATIONS_DIR`: To streamline the code, we reorganized the annotations and file paths for every dataset into a standard JSON format. These JSON files can be downloaded from [here](https://omnomnom.vision.rwth-aachen.de/data/STEm-Seg/dataset_jsons/). Set this variable to the directory holding these JSON files.
 
-2. `STEMSEG_MODELS_DIR`: Base directory where models are saved to by default. Only required for training. You can initially point this to any empty directory.
+2. `base_MODELS_DIR`: Base directory where models are saved to by default. Only required for training. You can initially point this to any empty directory.
 
    
    
